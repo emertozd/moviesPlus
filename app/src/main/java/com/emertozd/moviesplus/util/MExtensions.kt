@@ -6,10 +6,12 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.*
 import com.emertozd.moviesplus.data.models.Movie
+import com.emertozd.moviesplus.data.responses.DetailResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+
 
 operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(values: List<T>) {
     val value = this.value ?: arrayListOf()
@@ -69,3 +71,34 @@ class FlowObserver<T>(
 inline fun <reified T> Flow<T>.observeInLifecycle(
     lifecycleOwner: LifecycleOwner
 ) = FlowObserver(lifecycleOwner, this, {})
+
+fun Movie.toMovieDetailModel(): DetailResponse {
+
+    return DetailResponse(
+        adult = this.adult,
+        backdrop_path = this.backdrop_path,
+        belongs_to_collection = null,
+        budget = null,
+        genres = null,
+        homepage = null,
+        id = this.id,
+        imdb_id = null,
+        original_language = this.original_language,
+        original_title = this.original_title,
+        overview = this.overview,
+        popularity = this.popularity,
+        poster_path = this.poster_path,
+        production_companies = null,
+        production_countries = null,
+        release_date = this.release_date,
+        revenue = null,
+        runtime = null,
+        spoken_languages = null,
+        status = null,
+        tagline = null,
+        title, video, vote_average, vote_count
+
+
+    )
+
+}
