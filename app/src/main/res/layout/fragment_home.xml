@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.emertozd.moviesplus.data.models.SortOptions" />
+
+        <variable
+            name="viewModel"
+            type="com.emertozd.moviesplus.ui.home.HomeViewModel" />
+
+        <variable
+            name="afterTextChanged"
+            type="androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_moviesplus" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/fragmentDetail_toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:visibility="gone"
+                app:logo="@drawable/ic_moviesplus"
+                app:titleCentered="true" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:id="@+id/fragmentHome_svContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragmentHome_tvPopular"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/title_popular"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragmentHome_rvPopular"
+                    adapterMovieList="@{viewModel.popularListLiveData}"
+                    paginator="@{viewModel}"
+                    sortParameter="@{SortOptions.POPULAR}"
+                    toast="@{viewModel.toast}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:paddingLeft="@dimen/textSmallPadding"
+                    android:paddingRight="@dimen/textSmallPadding"
+                    android:paddingBottom="@dimen/textSmallPadding"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbarThumbVertical="@drawable/scrollbar"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_tvPopular"
+                    app:spanCount="3"
+                    tools:layout_height="160dp"
+                    tools:listitem="@layout/item_movie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragmentHome_tvTopRated"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/title_toprated"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_rvPopular" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragmentHome_rvTopRated"
+                    adapterMovieList="@{viewModel.topRatedListLiveData}"
+                    paginator="@{viewModel}"
+                    sortParameter="@{SortOptions.TOP_RATED}"
+                    toast="@{viewModel.toast}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:paddingLeft="@dimen/textSmallPadding"
+                    android:paddingRight="@dimen/textSmallPadding"
+                    android:paddingBottom="@dimen/textSmallPadding"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbarThumbVertical="@drawable/scrollbar"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_tvTopRated"
+                    app:spanCount="3"
+                    tools:layout_height="160dp"
+                    tools:listitem="@layout/item_movie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragmentHome_tvRevenue"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/title_revenue"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_rvTopRated" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragmentHome_rvRevenue"
+                    adapterMovieList="@{viewModel.revenueListLiveData}"
+                    paginator="@{viewModel}"
+                    sortParameter="@{SortOptions.REVENUE}"
+                    toast="@{viewModel.toast}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:paddingLeft="@dimen/textSmallPadding"
+                    android:paddingRight="@dimen/textSmallPadding"
+                    android:paddingBottom="@dimen/textSmallPadding"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbarThumbVertical="@drawable/scrollbar"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_tvRevenue"
+                    app:spanCount="3"
+                    tools:layout_height="160dp"
+                    tools:listitem="@layout/item_movie" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragmentHome_tvReleaseDate"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:text="@string/title_releasedate"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_rvRevenue" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragmentHome_rvReleaseDate"
+                    adapterMovieList="@{viewModel.releaseDateListLiveData}"
+                    paginator="@{viewModel}"
+                    sortParameter="@{SortOptions.RELEASE_DATE}"
+                    toast="@{viewModel.toast}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:paddingLeft="@dimen/textSmallPadding"
+                    android:paddingRight="@dimen/textSmallPadding"
+                    android:paddingBottom="@dimen/textSmallPadding"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbarThumbVertical="@drawable/scrollbar"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/fragmentHome_tvReleaseDate"
+                    app:spanCount="3"
+                    tools:layout_height="160dp"
+                    tools:listitem="@layout/item_movie" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/fragmentHome_pbLoading"
+            gone="@{!viewModel.loading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorColor="@color/colorAccent" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

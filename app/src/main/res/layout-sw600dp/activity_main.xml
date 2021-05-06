@@ -14,7 +14,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:layout_constraintRight_toLeftOf="@id/guideline"/>
+            app:layout_constraintRight_toLeftOf="@id/guideline"
+            app:navGraph="@navigation/nav_graph" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

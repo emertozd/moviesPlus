@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import
+            alias="R"
+            type="com.emertozd.moviesplus.R" />
+
+        <variable
+            name="movie"
+            type="com.emertozd.moviesplus.data.models.Movie" />
+    </data>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/itemMovie_cvRoot"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/cardDefaultElevation"
+            android:background="@color/darkGray"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/black"
+            app:cardCornerRadius="@dimen/cardDefaultRadius"
+            app:cardElevation="@dimen/cardDefaultElevation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/itemMovie_ivPoster"
+                    imageUrl="@{movie.poster_path}"
+                    placeHolderDrawable="@{R.drawable.movie_placeholder}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    tools:src="@drawable/movie_placeholder"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+</layout>
